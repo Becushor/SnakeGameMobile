@@ -6,6 +6,13 @@ public class SnakeHead : BodyPart
 {
     Vector2 movement;
 
+    private BodyPart tail = null;
+
+    const float TimeToAddBodyPart = 0.1f;
+    float addTimer = TimeToAddBodyPart;
+
+    public int partsToAdd = 0;
+
     void Start()
     {
         SwipeControls.OnSwipe += SwipeDetection;
@@ -16,6 +23,38 @@ public class SnakeHead : BodyPart
         SetMovement(movement);
         UpdateDirection();
         UpdatePosition();
+
+        if (partsToAdd > 0)
+        {
+            addTimer -= Time.deltaTime;
+            if (addTimer <= 0)
+            {
+                addTimer = TimeToAddBodyPart;
+                AddBodyPart();
+                partsToAdd--;
+            }
+        }
+    }
+
+    void AddBodyPart()
+    {
+        if (tail == null)
+        {
+            BodyPart newPart = Instantiate(GameController.instance.bodyPrefab, transform.position, Quaternion.identity);
+            newPart.following = this;
+            tail = newPart;
+            newPart.TurnIntoTail();
+        }
+        else
+        {
+            Vector3 newPosition = tail.transform.position;
+            newPosition.z += 0.01f;
+            BodyPart newPart = Instantiate(GameController.instance.bodyPrefab, newPosition, Quaternion.identity);
+            newPart.following = tail;
+            newPart.TurnIntoTail();
+            tail.TurnIntoBodyPart();
+            tail = newPart;
+        }
     }
 
     void SwipeDetection(SwipeControls.SwipeDirection direction)
@@ -55,5 +94,15 @@ public class SnakeHead : BodyPart
     void MoveRight()
     {
         movement = Vector2.right * GameController.instance.snakeSpeed * Time.deltaTime;
+    }
+
+    public void ResetSnake()
+    {
+        tail = null;
+
+        MoveUp();
+
+        partsToAdd = 5;
+        addTimer = TimeToAddBodyPart;
     }
 }
