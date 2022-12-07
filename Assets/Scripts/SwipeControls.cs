@@ -41,7 +41,7 @@ public class SwipeControls : MonoBehaviour
         {
             swipeStart = Input.mousePosition;
         }
-        else
+        else if (Input.GetMouseButtonUp(0))
         {
             swipeEnd = Input.mousePosition;
             ProcessSwipe();

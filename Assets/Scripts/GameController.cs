@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour
 {
     public static GameController instance = null;
 
+    public float snakeSpeed = 1;
+
     void Start()
     {
         instance = this;
