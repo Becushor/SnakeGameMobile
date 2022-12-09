@@ -6,7 +6,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController instance = null;
 
-    public float snakeSpeed = 0.5f;
+    public float snakeSpeed = 1;
 
     public BodyPart bodyPrefab = null;
     public SnakeHead snakeHead = null;

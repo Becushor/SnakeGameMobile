@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7265b5497865804458a3c132480715b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snakeSpeed: 0.5
+  snakeSpeed: 1
   bodyPrefab: {fileID: 7048437344189761060, guid: e39cdbef53bffae44b4c36ddc3c88f73, type: 3}
   snakeHead: {fileID: 364275167}
   tailSprite: {fileID: 21300000, guid: 3688d8723d4c3614394c0282d918e61d, type: 3}
@@ -215,6 +215,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   following: {fileID: 0}
+  previousPositions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  setIndex: 0
+  getIndex: -9
   partsToAdd: 0
 --- !u!212 &364275168
 SpriteRenderer:

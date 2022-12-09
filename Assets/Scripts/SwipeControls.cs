@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class SwipeControls : MonoBehaviour
 {
-    public enum SwipeDirection
-    {
-        Up, Down, Left, Right
-    }
-
-    public static event System.Action<SwipeDirection> OnSwipe = delegate { };
-
     Vector2 swipeStart;
     Vector2 swipeEnd;
 
     float minDistance = 10;
+
+    public static event System.Action<SwipeDirection> OnSwipe = delegate { };
+
+    public enum SwipeDirection
+    {
+        Up, Down, Left, Right
+    }
 
     void Start()
     {

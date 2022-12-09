@@ -18,8 +18,10 @@ public class SnakeHead : BodyPart
         SwipeControls.OnSwipe += SwipeDetection;
     }
 
-    void Update()
+    override public void Update()
     {
+        base.Update();
+
         SetMovement(movement);
         UpdateDirection();
         UpdatePosition();
@@ -40,7 +42,10 @@ public class SnakeHead : BodyPart
     {
         if (tail == null)
         {
-            BodyPart newPart = Instantiate(GameController.instance.bodyPrefab, transform.position, Quaternion.identity);
+            Vector3 newPosition = transform.position;
+            newPosition.z += 0.01f;
+
+            BodyPart newPart = Instantiate(GameController.instance.bodyPrefab, newPosition, Quaternion.identity);
             newPart.following = this;
             tail = newPart;
             newPart.TurnIntoTail();
@@ -49,6 +54,7 @@ public class SnakeHead : BodyPart
         {
             Vector3 newPosition = tail.transform.position;
             newPosition.z += 0.01f;
+
             BodyPart newPart = Instantiate(GameController.instance.bodyPrefab, newPosition, Quaternion.identity);
             newPart.following = tail;
             newPart.TurnIntoTail();
@@ -78,22 +84,22 @@ public class SnakeHead : BodyPart
 
     void MoveUp()
     {
-        movement = Vector2.up * GameController.instance.snakeSpeed * Time.deltaTime;
+        movement = GameController.instance.snakeSpeed * Time.deltaTime * Vector2.up;
     }
 
     void MoveDown()
     {
-        movement = Vector2.down * GameController.instance.snakeSpeed * Time.deltaTime;
+        movement = GameController.instance.snakeSpeed * Time.deltaTime * Vector2.down;
     }
 
     void MoveLeft()
     {
-        movement = Vector2.left * GameController.instance.snakeSpeed * Time.deltaTime;
+        movement = GameController.instance.snakeSpeed * Time.deltaTime * Vector2.left;
     }
 
     void MoveRight()
     {
-        movement = Vector2.right * GameController.instance.snakeSpeed * Time.deltaTime;
+        movement = GameController.instance.snakeSpeed * Time.deltaTime * Vector2.right;
     }
 
     public void ResetSnake()
