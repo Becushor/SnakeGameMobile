@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snakeSpeed: 1
+  rockPrefab: {fileID: 6057553450152991314, guid: 375d6e49d35307d4195c77456346beb3, type: 3}
   bodyPrefab: {fileID: 7048437344189761060, guid: e39cdbef53bffae44b4c36ddc3c88f73, type: 3}
   snakeHead: {fileID: 364275167}
   tailSprite: {fileID: 21300000, guid: 3688d8723d4c3614394c0282d918e61d, type: 3}
