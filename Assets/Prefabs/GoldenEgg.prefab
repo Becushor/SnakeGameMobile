@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6686720983447208703}
   - component: {fileID: 6791764117808766725}
   - component: {fileID: 2614035281136457520}
+  - component: {fileID: 2635946365874705665}
   m_Layer: 0
   m_Name: GoldenEgg
   m_TagString: Untagged
@@ -93,9 +94,21 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.235
+  m_Radius: 0.22
+--- !u!114 &2635946365874705665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7387948409762090616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b75df071311284bb0c4970b0bf8b98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

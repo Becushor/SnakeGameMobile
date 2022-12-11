@@ -41,20 +41,22 @@ public class GameController : MonoBehaviour
 
     void CreateWalls()
     {
-        Vector3 start = new Vector3(-Width, -Height, 0);
-        Vector3 finish = new Vector3(-Width, Height, 0);
+        float z = -1f;
+
+        Vector3 start = new Vector3(-Width, -Height, z);
+        Vector3 finish = new Vector3(-Width, Height, z);
         CreateWall(start, finish);
         
-        start = new Vector3(Width, -Height, 0);
-        finish = new Vector3(Width, Height, 0);
+        start = new Vector3(Width, -Height, z);
+        finish = new Vector3(Width, Height, z);
         CreateWall(start, finish);
 
-        start = new Vector3(-Width, -Height, 0);
-        finish = new Vector3(Width, -Height, 0);
+        start = new Vector3(-Width, -Height, z);
+        finish = new Vector3(Width, -Height, z);
         CreateWall(start, finish);
 
-        start = new Vector3(-Width, Height, 0);
-        finish = new Vector3(Width, Height, 0);
+        start = new Vector3(-Width, Height, z);
+        finish = new Vector3(Width, Height, z);
         CreateWall(start, finish);
     }
 
@@ -86,7 +88,7 @@ public class GameController : MonoBehaviour
         Vector3 position;
         position.x = -Width + Random.Range(1f, (Width * 2) - 2f);
         position.y = -Height + Random.Range(1f, (Height * 2) - 2f);
-        position.z = 0;
+        position.z = -1f;
 
         if (isGolden)
             Instantiate(goldEggPrefab, position, Quaternion.identity);
