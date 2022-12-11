@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
     public float snakeSpeed = 1;
 
     public GameObject rockPrefab = null;
+    public GameObject eggPrefab = null;
+    public GameObject goldEggPrefab = null;
 
     public BodyPart bodyPrefab = null;
     public SnakeHead snakeHead = null;
@@ -24,6 +26,7 @@ public class GameController : MonoBehaviour
         instance = this;
         CreateWalls();
         StartGame();
+        CreateEgg();
     }
 
     void Update()
@@ -76,5 +79,18 @@ public class GameController : MonoBehaviour
     {
         GameObject rock = Instantiate(rockPrefab, position, Quaternion.Euler(0, 0, rotation));
         rock.transform.localScale = new Vector3(scale, scale, 1);
+    }
+
+    void CreateEgg(bool isGolden = false)
+    {
+        Vector3 position;
+        position.x = -Width + Random.Range(1f, (Width * 2) - 2f);
+        position.y = -Height + Random.Range(1f, (Height * 2) - 2f);
+        position.z = 0;
+
+        if (isGolden)
+            Instantiate(goldEggPrefab, position, Quaternion.identity);
+        else
+            Instantiate(eggPrefab, position, Quaternion.identity);
     }
 }
