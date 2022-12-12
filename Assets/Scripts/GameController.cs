@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public float snakeSpeed = 1;
 
     public bool alive = true;
+    public bool waitingToPlay = true;
 
     public GameObject rockPrefab = null;
     public GameObject eggPrefab = null;
@@ -23,27 +24,43 @@ public class GameController : MonoBehaviour
     public Sprite tailSprite = null;
     public Sprite bodySprite = null;
 
+    List<Egg> eggs = new List<Egg>();
+
     void Start()
     {
         instance = this;
         CreateWalls();
-        StartGame();
         CreateEgg();
+        alive = false;
     }
 
     void Update()
     {
-        
+        if (waitingToPlay)
+        {
+            foreach (Touch touch in Input.touches)
+            {
+                if (touch.phase == TouchPhase.Ended) //press on the screen just ended
+                    StartGamePlay();
+            }
+            if (Input.GetMouseButtonDown(0))
+                StartGamePlay();
+        }
     }
 
-    void StartGame()
+    public void StartGamePlay()
     {
+        waitingToPlay = false;
+        alive = true;
+
+        KillOldEggs();
         snakeHead.ResetSnake();
     }
 
     public void GameOver()
     {
         alive = false;
+        waitingToPlay = true;
     }
 
     public void EggEaten(Egg egg)
@@ -102,9 +119,22 @@ public class GameController : MonoBehaviour
         position.y = -Height + Random.Range(1f, (Height * 2) - 2f);
         position.z = -1f;
 
+        Egg egg = null;
+
         if (isGolden)
-            Instantiate(goldEggPrefab, position, Quaternion.identity);
+            egg = Instantiate(goldEggPrefab, position, Quaternion.identity).GetComponent<Egg>();
         else
-            Instantiate(eggPrefab, position, Quaternion.identity);
+            egg = Instantiate(eggPrefab, position, Quaternion.identity).GetComponent<Egg>();
+
+        eggs.Add(egg);
+    }
+
+    void KillOldEggs()
+    {
+        foreach (Egg egg in eggs)
+        {
+            Destroy(egg.gameObject);
+        }
+        eggs.Clear();
     }
 }

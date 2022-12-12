@@ -8,10 +8,12 @@ public class SnakeHead : BodyPart
 
     private BodyPart tail = null;
 
-    const float TimeToAddBodyPart = 0.1f;
-    float addTimer = TimeToAddBodyPart;
+    List<BodyPart> parts = new List<BodyPart>();
 
     public int partsToAdd = 0;
+
+    const float TimeToAddBodyPart = 0.1f;
+    float addTimer = TimeToAddBodyPart;
 
     void Start()
     {
@@ -51,6 +53,8 @@ public class SnakeHead : BodyPart
             newPart.following = this;
             tail = newPart;
             newPart.TurnIntoTail();
+
+            parts.Add(newPart);
         }
         else
         {
@@ -62,6 +66,8 @@ public class SnakeHead : BodyPart
             newPart.TurnIntoTail();
             tail.TurnIntoBodyPart();
             tail = newPart;
+
+            parts.Add(newPart);
         }
     }
 
@@ -106,9 +112,17 @@ public class SnakeHead : BodyPart
 
     public void ResetSnake()
     {
-        tail = null;
+        foreach (BodyPart part in parts)
+        {
+            Destroy(part.gameObject);
+        }
+        parts.Clear();
 
+        tail = null;
         MoveUp();
+
+        gameObject.transform.localEulerAngles = new Vector3(0, 0, 0); //up
+        gameObject.transform.position = new Vector3(0, 0, -8); //center
 
         partsToAdd = 5;
         addTimer = TimeToAddBodyPart;
