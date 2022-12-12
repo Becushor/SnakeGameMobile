@@ -10,6 +10,10 @@ public class GameController : MonoBehaviour
     const float Height = 7f;
 
     public float snakeSpeed = 1;
+    const float MaxSpeed = 6;
+
+    private int level = 0;
+    private int eggsForLevelUp = 0;
 
     public bool alive = true;
     public bool waitingToPlay = true;
@@ -54,7 +58,7 @@ public class GameController : MonoBehaviour
         alive = true;
 
         KillOldEggs();
-        snakeHead.ResetSnake();
+        LevelUp();
     }
 
     public void GameOver()
@@ -63,8 +67,29 @@ public class GameController : MonoBehaviour
         waitingToPlay = true;
     }
 
+    void LevelUp()
+    {
+        level++;
+        eggsForLevelUp = (level * 2) + 4;
+
+        snakeSpeed = (level / 4) + 1f;
+        if (snakeSpeed > MaxSpeed) snakeSpeed = MaxSpeed;
+
+        snakeHead.ResetSnake();
+        CreateEgg();
+    }
+
     public void EggEaten(Egg egg)
     {
+        eggsForLevelUp--;
+        if (eggsForLevelUp == 0)
+            LevelUp();
+        else if (eggsForLevelUp == 1)
+            CreateEgg(true); //last egg is golden
+        else
+            CreateEgg(false); //normal egg
+
+        eggs.Remove(egg);
         Destroy(egg.gameObject);
     }
 

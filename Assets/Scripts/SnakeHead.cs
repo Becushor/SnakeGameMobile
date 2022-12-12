@@ -61,7 +61,7 @@ public class SnakeHead : BodyPart
             Vector3 newPosition = tail.transform.position;
             newPosition.z += 0.01f;
 
-            BodyPart newPart = Instantiate(GameController.instance.bodyPrefab, newPosition, Quaternion.identity);
+            BodyPart newPart = Instantiate(GameController.instance.bodyPrefab, newPosition, tail.transform.rotation);
             newPart.following = tail;
             newPart.TurnIntoTail();
             tail.TurnIntoBodyPart();
