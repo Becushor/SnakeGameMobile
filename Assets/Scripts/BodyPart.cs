@@ -30,6 +30,8 @@ public class BodyPart : MonoBehaviour
 
     virtual public void Update()
     {
+        if (!GameController.instance.alive) return;
+
         Vector3 followPosition;
         if (following != null)
         {

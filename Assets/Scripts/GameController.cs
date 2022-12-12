@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
 
     public float snakeSpeed = 1;
 
+    public bool alive = true;
+
     public GameObject rockPrefab = null;
     public GameObject eggPrefab = null;
     public GameObject goldEggPrefab = null;
@@ -37,6 +39,16 @@ public class GameController : MonoBehaviour
     void StartGame()
     {
         snakeHead.ResetSnake();
+    }
+
+    public void GameOver()
+    {
+        alive = false;
+    }
+
+    public void EggEaten(Egg egg)
+    {
+        Destroy(egg.gameObject);
     }
 
     void CreateWalls()

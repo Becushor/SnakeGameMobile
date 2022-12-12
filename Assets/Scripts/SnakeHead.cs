@@ -20,6 +20,8 @@ public class SnakeHead : BodyPart
 
     override public void Update()
     {
+        if (!GameController.instance.alive) return;
+
         base.Update();
 
         SetMovement(movement);
@@ -114,11 +116,26 @@ public class SnakeHead : BodyPart
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Egg egg = GetComponent<Egg>();
+        Egg egg = collision.GetComponent<Egg>();
 
         if (egg)
+        {
             Debug.Log("Hit egg");
+            EatEgg(egg);
+        }
         else
+        {
             Debug.Log("Hit obstacle");
+            GameController.instance.GameOver();
+        }
+
+    }
+
+    private void EatEgg(Egg egg)
+    {
+        partsToAdd = 5;
+        addTimer = 0;
+
+        GameController.instance.EggEaten(egg);
     }
 }
