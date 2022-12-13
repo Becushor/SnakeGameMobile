@@ -99,4 +99,10 @@ public class BodyPart : MonoBehaviour
     {
         spriteRenderer.sprite = GameController.instance.bodySprite;
     }
+
+    public void ResetMemory()
+    {
+        setIndex = 0;
+        getIndex = -(PartsRemembered - 1);
+    }
 }

@@ -62,6 +62,7 @@ public class GameController : MonoBehaviour
 
     public void StartGamePlay()
     {
+        level = 0;
         score = 0;
         scoreText.text = "Score: " + score;
         highScoreText.text = "High Score: " + highscore;
@@ -101,6 +102,7 @@ public class GameController : MonoBehaviour
     {
         score++;
         eggsForLevelUp--;
+
         if (eggsForLevelUp == 0)
         {
             score += 10;

@@ -10,6 +10,9 @@ public class SnakeHead : BodyPart
 
     List<BodyPart> parts = new List<BodyPart>();
 
+    public AudioSource[] gulpSounds = new AudioSource[3];
+    public AudioSource dieSound = null;
+
     public int partsToAdd = 0;
 
     const float TimeToAddBodyPart = 0.1f;
@@ -26,7 +29,7 @@ public class SnakeHead : BodyPart
 
         base.Update();
 
-        SetMovement(movement);
+        SetMovement(movement * Time.deltaTime);
         UpdateDirection();
         UpdatePosition();
 
@@ -92,22 +95,22 @@ public class SnakeHead : BodyPart
 
     void MoveUp()
     {
-        movement = GameController.instance.snakeSpeed * Time.deltaTime * Vector2.up;
+        movement = GameController.instance.snakeSpeed * Vector2.up;
     }
 
     void MoveDown()
     {
-        movement = GameController.instance.snakeSpeed * Time.deltaTime * Vector2.down;
+        movement = GameController.instance.snakeSpeed * Vector2.down;
     }
 
     void MoveLeft()
     {
-        movement = GameController.instance.snakeSpeed * Time.deltaTime * Vector2.left;
+        movement = GameController.instance.snakeSpeed * Vector2.left;
     }
 
     void MoveRight()
     {
-        movement = GameController.instance.snakeSpeed * Time.deltaTime * Vector2.right;
+        movement = GameController.instance.snakeSpeed * Vector2.right;
     }
 
     public void ResetSnake()
@@ -117,6 +120,8 @@ public class SnakeHead : BodyPart
             Destroy(part.gameObject);
         }
         parts.Clear();
+
+        ResetMemory();
 
         tail = null;
         MoveUp();
@@ -134,13 +139,14 @@ public class SnakeHead : BodyPart
 
         if (egg)
         {
-            Debug.Log("Hit egg");
             EatEgg(egg);
+            int randomGulpSound = Random.Range(0, 3);
+            gulpSounds[randomGulpSound].Play();
         }
         else
         {
-            Debug.Log("Hit obstacle");
             GameController.instance.GameOver();
+            dieSound.Play();
         }
 
     }
