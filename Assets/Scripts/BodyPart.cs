@@ -26,7 +26,7 @@ public class BodyPart : MonoBehaviour
         
     }
 
-    virtual public void Update()
+    virtual public void FixedUpdate()
     {
         if (!GameController.instance.alive) return;
 

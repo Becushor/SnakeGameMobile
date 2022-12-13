@@ -23,11 +23,11 @@ public class SnakeHead : BodyPart
         SwipeControls.OnSwipe += SwipeDetection;
     }
 
-    override public void Update()
+    override public void FixedUpdate()
     {
         if (!GameController.instance.alive) return;
 
-        base.Update();
+        base.FixedUpdate();
 
         SetMovement(movement * Time.deltaTime);
         UpdateDirection();
