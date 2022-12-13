@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -15,8 +16,16 @@ public class GameController : MonoBehaviour
     private int level = 0;
     private int eggsForLevelUp = 0;
 
+    public int score = 0;
+    public int highscore = 0;
+
     public bool alive = true;
     public bool waitingToPlay = true;
+
+    public Text scoreText = null;
+    public Text highScoreText = null;
+    public Text gameOverText = null;
+    public Text tapToPlayText = null;
 
     public GameObject rockPrefab = null;
     public GameObject eggPrefab = null;
@@ -34,7 +43,6 @@ public class GameController : MonoBehaviour
     {
         instance = this;
         CreateWalls();
-        CreateEgg();
         alive = false;
     }
 
@@ -54,6 +62,13 @@ public class GameController : MonoBehaviour
 
     public void StartGamePlay()
     {
+        score = 0;
+        scoreText.text = "Score: " + score;
+        highScoreText.text = "High Score: " + highscore;
+
+        gameOverText.gameObject.SetActive(false);
+        tapToPlayText.gameObject.SetActive(false);
+
         waitingToPlay = false;
         alive = true;
 
@@ -65,6 +80,9 @@ public class GameController : MonoBehaviour
     {
         alive = false;
         waitingToPlay = true;
+
+        gameOverText.gameObject.SetActive(true);
+        tapToPlayText.gameObject.SetActive(true);
     }
 
     void LevelUp()
@@ -81,13 +99,24 @@ public class GameController : MonoBehaviour
 
     public void EggEaten(Egg egg)
     {
+        score++;
         eggsForLevelUp--;
         if (eggsForLevelUp == 0)
+        {
+            score += 10;
             LevelUp();
+        }
         else if (eggsForLevelUp == 1)
             CreateEgg(true); //last egg is golden
         else
             CreateEgg(false); //normal egg
+
+        if (score > highscore)
+        {
+            highscore = score;
+            highScoreText.text = "High Score: " + highscore;
+        }
+        scoreText.text = "Score: " + score;
 
         eggs.Remove(egg);
         Destroy(egg.gameObject);

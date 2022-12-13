@@ -8,8 +8,6 @@ public class BodyPart : MonoBehaviour
 
     public BodyPart following = null;
 
-    private bool isTail = false;
-
     private SpriteRenderer spriteRenderer = null;
 
     const int PartsRemembered = 10;
@@ -94,13 +92,11 @@ public class BodyPart : MonoBehaviour
     
     public void TurnIntoTail()
     {
-        isTail = true;
         spriteRenderer.sprite = GameController.instance.tailSprite;
     }
 
     public void TurnIntoBodyPart()
     {
-        isTail = false;
         spriteRenderer.sprite = GameController.instance.bodySprite;
     }
 }
