@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     const float Width = 3.7f;
     const float Height = 7f;
 
-    public float snakeSpeed = 1;
+    public float snakeSpeed;
     const float MaxSpeed = 6;
 
     private int level = 0;
@@ -91,7 +91,7 @@ public class GameController : MonoBehaviour
         level++;
         eggsForLevelUp = (level * 2) + 4;
 
-        snakeSpeed = (level / 4) + 1f;
+        snakeSpeed = (level / 4) + 1.5f;
         if (snakeSpeed > MaxSpeed) snakeSpeed = MaxSpeed;
 
         snakeHead.ResetSnake();
