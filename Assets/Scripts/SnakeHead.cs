@@ -18,10 +18,7 @@ public class SnakeHead : BodyPart
     const float TimeToAddBodyPart = 0.1f;
     float addTimer = TimeToAddBodyPart;
 
-    void Start()
-    {
-        SwipeControls.OnSwipe += SwipeDetection;
-    }
+    void Start() => SwipeControls.OnSwipe += SwipeDetection;
 
     override public void FixedUpdate()
     {
@@ -93,25 +90,13 @@ public class SnakeHead : BodyPart
         }
     }
 
-    void MoveUp()
-    {
-        movement = GameController.instance.snakeSpeed * Vector2.up;
-    }
+    void MoveUp() => movement = GameController.instance.snakeSpeed * Vector2.up;
 
-    void MoveDown()
-    {
-        movement = GameController.instance.snakeSpeed * Vector2.down;
-    }
+    void MoveDown() => movement = GameController.instance.snakeSpeed * Vector2.down;
 
-    void MoveLeft()
-    {
-        movement = GameController.instance.snakeSpeed * Vector2.left;
-    }
+    void MoveLeft() => movement = GameController.instance.snakeSpeed * Vector2.left;
 
-    void MoveRight()
-    {
-        movement = GameController.instance.snakeSpeed * Vector2.right;
-    }
+    void MoveRight() => movement = GameController.instance.snakeSpeed * Vector2.right;
 
     public void ResetSnake()
     {

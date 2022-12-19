@@ -16,11 +16,6 @@ public class SwipeControls : MonoBehaviour
         Up, Down, Left, Right
     }
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         foreach (Touch touch in Input.touches)

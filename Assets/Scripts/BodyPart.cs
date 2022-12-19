@@ -16,15 +16,7 @@ public class BodyPart : MonoBehaviour
     public int setIndex = 0;
     public int getIndex = -(PartsRemembered - 1);
 
-    private void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    void Start()
-    {
-        
-    }
+    private void Awake() => spriteRenderer = GetComponent<SpriteRenderer>();
 
     virtual public void FixedUpdate()
     {
@@ -68,15 +60,9 @@ public class BodyPart : MonoBehaviour
         }
     }
 
-    public void SetMovement(Vector2 movement)
-    {
-        dPosition = movement;
-    }
+    public void SetMovement(Vector2 movement) => dPosition = movement;
 
-    public void UpdatePosition()
-    {
-        gameObject.transform.position += (Vector3)dPosition;
-    }
+    public void UpdatePosition() => gameObject.transform.position += (Vector3)dPosition;
 
     public void UpdateDirection()
     {
@@ -90,15 +76,9 @@ public class BodyPart : MonoBehaviour
             gameObject.transform.localEulerAngles = new Vector3(0, 0, -90);
     }
     
-    public void TurnIntoTail()
-    {
-        spriteRenderer.sprite = GameController.instance.tailSprite;
-    }
+    public void TurnIntoTail() => spriteRenderer.sprite = GameController.instance.tailSprite;
 
-    public void TurnIntoBodyPart()
-    {
-        spriteRenderer.sprite = GameController.instance.bodySprite;
-    }
+    public void TurnIntoBodyPart() => spriteRenderer.sprite = GameController.instance.bodySprite;
 
     public void ResetMemory()
     {
